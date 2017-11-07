@@ -1,11 +1,14 @@
 module.exports = {
-  method: "POST",
-  path: "/api/users/login",
+  method: "POST", //http method used
+  path: "/api/users/login", //request url to access this endpoint
   config: {
-    auth: {
-      mode: "optional"
-    },
+    //sets how the request is handled after its recieved
+    //auth.mode set to optional will be accessable to all without authentication
+    // auth: {
+    //   mode: "optional"
+    // },
     handler: function(request, reply) {
+      //runs when a request is recieved
       reply("not implemented");
     }
   }

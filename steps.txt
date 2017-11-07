@@ -1,0 +1,26 @@
+AUTHENTICATION SETUP
+
+1. install required packages
+     -jsonwebtoken
+     -hapi-auth-jwt2
+     -bcrypt-as-promised
+
+2. add 'hapi-auth-jwt2' to index and use as plugin for server.register
+
+3. modify api plugin (api.js) and add auth scheme setup set defaultmethod for auth
+
+4. add 'auth.mode' as 'optional' to each config we want public
+
+5. modify user to include methods to (generatePassword) should generate a salt/hash and update the password field
+
+6. modify user to execute 'generatePassword' before saving
+
+7. improve our signup/create by filtering through to search for duplicates
+
+8. modify user to include methods to (comparePassword) should use the password passed in as the param to the password stored on the user with the bcrypt.compare methods
+
+9. modify login to filter through users to find the user with the email and compare the password if result is successful return auth user
+
+10. modify user to include methods to (generateJWT(user)) will create a web token using jwt.sign(data,secretkey,optionsObject) 
+
+11. improve login to generate Json web token before sending the user back to the http response

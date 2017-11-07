@@ -1,26 +1,31 @@
-const hapi = require("hapi");
-const api = require("./api");
+const hapi = require("hapi"); //requiring hapi to set up server
+const api = require("./api"); //requiring api to register api endpoints
 
-const server = new hapi.Server();
+const server = new hapi.Server(); //building a new server
 
 server.connection({
-  host: "localhost",
-  port: 4040,
+  //setting up server connection
+  host: "localhost", //at localhost
+  port: 4040, //with the port of 4040
   routes: {
-    cors: true
+    cors: true //allows requests between clients and servers unless its false
   },
   router: {
-    stripTrailingSlash: true
+    stripTrailingSlash: true //strips the last slash off the request url
   }
 });
 
-server.register([
-  {
-    register: api
-  }
-]);
-
 server
-  .start()
-  .then(() => console.log(`Server started at: ${server.info.uri}`))
+  .register([
+    //takes plugins as an array and executes each
+    {
+      register: api //snippet of code that modifies the server settings usually pre built
+    }
+  ])
+  .then(() => {
+    server //turning the server on making the api reachable
+      .start()
+      .then(() => console.log(`Server started at: ${server.info.uri}`))
+      .catch(err => console.log(err));
+  })
   .catch(err => console.log(err));
